@@ -3638,8 +3638,8 @@ final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewDelegate 
                 return
             }
             switch result {
-            case .failure:
-                break
+            case .failure(let error):
+                strongSelf.controller?.present(textAlertController(context: strongSelf.context, updatedPresentationData: strongSelf.controller?.updatedPresentationData, title: "Ошибка", text: "Не удалось получить дату:\n\(error.localizedDescription)", actions: [TextAlertAction(type: .defaultAction, title: strongSelf.presentationData.strings.Common_OK, action: {})]), in: .window(.root))
             case .success(let dateTime):
                 strongSelf.requestedDateTime = stringForDate(
                     date: dateTime.datetime,
